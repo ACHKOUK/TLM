@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+      <!-- explicit list view definition -->
+      
+      <record model="ir.ui.view" id="mon_parc.listTrajet">
+        <field name="name">Trajet</field>
+        <field name="model">mon_parc.trajet</field>
+        <field name="arch" type="xml">
+          <tree>
+             <field name="trajet"/>
+             <field name="detail"/>
+          </tree>
+        </field>
+      </record>
+      
+  
+      <!-- actions opening views on models -->
+      
+      <record model="ir.actions.act_window" id="mon_parc.action_windowTrajet">
+        <field name="name">Trajet</field>
+        <field name="res_model">mon_parc.trajet</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+     
+  
+      <!-- server action to the one above -->
+      
+      <record model="ir.actions.server" id="mon_parc.action_server">
+        <field name="name">Trajet server</field>
+        <field name="model_id" ref="model_mon_parc_trajet"/>
+        <field name="state">code</field>
+        <field name="code">
+          action = {
+            "type": "ir.actions.act_window",
+            "view_mode": "tree,form",
+            "res_model": self._name,
+          }
+        </field>
+      </record>
+
+      
+      <!-- menu categories -->
+      
+      <menuitem name="Trajets" id="mon_parc.trajet" parent="mon_parc.menu_root"/>
+      
+      <menuitem name="List des trajets" id="mon_parc.trajet_list" parent="mon_parc.trajet"
+                action="mon_parc.action_windowTrajet"/>
+      
+    </data>
+  </odoo>

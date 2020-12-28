@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="mon_parc.listchauffeur">
+            <field name="name">chauffeur</field>
+            <field name="model">mon_parc.chauffeur</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Immatricule"/>
+                    <field name="nom"/>
+                    <field name="CIN"/>
+                    <field name="Npassport"/>
+                    <field name="Dateexpiration"/>
+                    <field name="VisaDu"/>
+                    <field name="VisaAu"/>
+                    <field name="CNSS"/>
+                    <field name="CDM"/>
+                    <field name="DateNaissance"/>
+                    <field name="NTelephoneMaroc"/>
+                    <field name="NTelephoneFrance"/>
+                    <field name="NTelephoneEspagne"/>
+                    <field name="BadgeProvisoire"/>
+                    <field name="BadgeDossier"/>
+                    <field name="Disponibilite"/>
+                </tree>
+            </field>
+        </record>
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="mon_parc.action_windowchauffeur">
+            <field name="name">employes</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">kanban,tree,form,activity</field>
+        </record>
+
+
+
+        <!-- server action to the one above -->
+        <record model="ir.actions.server" id="mon_parc.action_server">
+            <field name="name">chauffeur server</field>
+            <field name="model_id" ref="model_mon_parc_chauffeur"/>
+            <field name="state">code</field>
+            <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+        </record>
+        <menuitem name="Mon parc" id="mon_parc.menu_root"/>
+
+        <menuitem name="personnel" id="mon_parc.personnel" parent="mon_parc.menu_root" />
+        <!-- actions   -->
+        <menuitem name="List des employes" id="mon_parc.chauffeur_list" parent="mon_parc.personnel"
+              action="mon_parc.action_windowchauffeur"/>
+
+    </data>
+</odoo>

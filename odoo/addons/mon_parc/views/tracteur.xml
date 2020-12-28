@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="mon_parc.listTracteur">
+            <field name="name">Tracteur</field>
+            <field name="model">mon_parc.tracteur</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="Immatriculatin"/>
+                    <field name="NChassis"/>
+                    <field name="VisiteTechnique"/>
+                    <field name="AssuranceNational"/>
+                    <field name="Vidange"/>
+                    <field name="Extinteur"/>
+                    <field name="Disponibilitetracteur"/>
+                    <field name="CodeSecretAS24"/>
+                    <field name="CodeSecretTRAFIC"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record model="ir.actions.act_window" id="mon_parc.action_windowTracteur">
+            <field name="name">Tracteur</field>
+            <field name="res_model">mon_parc.tracteur</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="mon_parc.action_fleet">
+          <field name="name">vehicle</field>
+          <field name="res_model">fleet.vehicle</field>
+          <field name="view_mode">tree,form</field>
+          <!-- <field name="view_mode">tree,form , calendar, pivot, graph, activity</field> -->
+      </record>
+
+        <!-- server action to the one above -->
+        <record model="ir.actions.server" id="mon_parc.action_server">
+            <field name="name">Tracteur server</field>
+            <field name="model_id" ref="model_mon_parc_tracteur"/>
+            <field name="state">code</field>
+            <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+        </record>
+        <!-- Top menu item -->
+        <menuitem name="TLM" id="mon_parc.menu_root" web_icon="mon_parc,static/description/icon.png"/>
+
+        <!-- menu categories -->
+        <menuitem name="vehicule" id="mon_parc.vehicule" parent="mon_parc.menu_root"/>
+
+        <!-- <menuitem name="List des tracteurs" id="mon_parc.tracteur_list" parent="mon_parc.vehicule"
+              action="mon_parc.action_windowTracteur"/> -->
+
+        <menuitem name="List des vehicles" id="mon_parc.chauffeur_list2" parent="mon_parc.vehicule"
+              action="mon_parc.action_fleet"/>
+              
+    </data>
+</odoo>

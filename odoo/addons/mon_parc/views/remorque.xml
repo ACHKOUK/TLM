@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+      <!-- explicit list view definition -->
+      
+      <record model="ir.ui.view" id="mon_parc.listRemorques">
+        <field name="name">Remorques</field>
+        <field name="model">mon_parc.remorque</field>
+        <field name="arch" type="xml">
+          <tree>
+             <field name="Immatriculatin"/>
+            <field name="NChassis"/>
+            <field name="VisiteTechnique"/>
+            <field name="AssuranceNational"/>
+            <field name="Vidange"/>
+            <field name="Extinteur"/>
+            <field name="DisponibiliteRemorque"/>
+          </tree>
+        </field>
+      </record>
+      
+  
+      <!-- actions opening views on models -->
+      
+      <record model="ir.actions.act_window" id="mon_parc.action_windowremorque">
+        <field name="name">Remorques</field>
+        <field name="res_model">mon_parc.remorque</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+     
+  
+      <!-- server action to the one above -->
+      
+      <record model="ir.actions.server" id="mon_parc.action_server">
+        <field name="name">Remorques server</field>
+        <field name="model_id" ref="model_mon_parc_remorque"/>
+        <field name="state">code</field>
+        <field name="code">
+          action = {
+            "type": "ir.actions.act_window",
+            "view_mode": "tree,form",
+            "res_model": self._name,
+          }
+        </field>
+      </record>
+      
+  
+      <!-- Top menu item -->
+      
+      <!-- <menuitem name="Mon parc" id="mon_parc.menu_root"/> -->
+      
+      <!-- menu categories -->
+      
+      <!-- <menuitem name="vehicule" id="mon_parc.vehicule" parent="mon_parc.menu_root"/> -->
+      
+      
+      <!-- actions   -->
+      <!-- <menuitem name="List des remorques" id="mon_parc.remorque_list" parent="mon_parc.vehicule"
+                action="mon_parc.action_windowremorque"/> -->
+      
+    </data>
+  </odoo>
